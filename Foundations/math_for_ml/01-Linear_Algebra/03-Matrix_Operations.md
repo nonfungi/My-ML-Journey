@@ -7,60 +7,50 @@ T
  , is an operation that flips the matrix over its main diagonal. In other words, the rows of the original matrix become the columns of the transposed matrix.
 
 Example:
+
 If:
-$$ A = \begin{bmatrix} 1 & 2 \ 3 & 4 \ 5 & 6 \end{bmatrix} $$
+A = \begin{bmatrix}
+1 & 2 \\
+3 & 4 \\
+5 & 6
+\end{bmatrix}
 Then its transpose is:
-$$ A^T = \begin{bmatrix} 1 & 3 & 5 \ 2 & 4 & 6 \end{bmatrix} $$
+A^T = \begin{bmatrix}
+1 & 3 & 5 \\
+2 & 4 & 6
+\end{bmatrix}
 
 2. Matrix Addition and Scalar Multiplication
 These operations are straightforward and work element by element, just like with vectors.
 
 Matrix Addition: You can only add two matrices if they have the same dimensions. The addition happens element-wise.
 
-[ 
-a
-c
-​
-  
-b
-d
-​
- ]+[ 
-e
-g
-​
-  
-f
-h
-​
- ]=[ 
-a+e
-c+g
-​
-  
-b+f
-d+h
-​
- ]
-Scalar Multiplication: You multiply every element of the matrix by a single scalar number.
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
++
+\begin{bmatrix}
+e & f \\
+g & h
+\end{bmatrix}
+=
+\begin{bmatrix}
+a+e & b+f \\
+c+g & d+h
+\end{bmatrix}
 
-k⋅[ 
-a
-c
-​
-  
-b
-d
-​
- ]=[ 
-ka
-kc
-​
-  
-kb
-kd
-​
- ]
+Scalar Multiplication: You multiply every element of the matrix by a single scalar number.
+k \cdot \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+=
+\begin{bmatrix}
+ka & kb \\
+kc & kd
+\end{bmatrix}
+
 3. Matrix Multiplication (The Most Important Operation)
 Matrix multiplication is not element-wise. It's a process of combining two matrices to produce a third. It's the core operation in linear transformations and neural networks.
 
@@ -69,27 +59,28 @@ The Rule: To multiply two matrices A and B (to get C=AB), the number of columns 
 Calculation: Each element in the resulting matrix C is the dot product of a row from matrix A and a column from matrix B.
 
 Example:
-Let:
-$$ A = \begin{bmatrix} 1 & 2 \ 3 & 4 \end{bmatrix}, \quad B = \begin{bmatrix} 5 & 6 \ 7 & 8 \end{bmatrix} $$
-Then C=AB is calculated as:
 
-C=[ 
-(1⋅5+2⋅7)
-(3⋅5+4⋅7)
-​
-  
-(1⋅6+2⋅8)
-(3⋅6+4⋅8)
-​
- ]=[ 
-19
-43
-​
-  
-22
-50
-​
- ]
+Let:A = \begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}
+, \quad
+B = \begin{bmatrix}
+5 & 6 \\
+7 & 8
+\end{bmatrix}
+
+Then C=AB is calculated as:
+C = \begin{bmatrix}
+(1 \cdot 5 + 2 \cdot 7) & (1 \cdot 6 + 2 \cdot 8) \\
+(3 \cdot 5 + 4 \cdot 7) & (3 \cdot 6 + 4 \cdot 8)
+\end{bmatrix}
+=
+\begin{bmatrix}
+19 & 22 \\
+43 & 50
+\end{bmatrix}
+
 Critical Property: Matrix multiplication is not commutative. This means that in most cases, AB
 
 =BA. The order matters!
@@ -99,31 +90,21 @@ There is also an element-wise product, which is less common in transformations b
 
 Formula:
 
-[ 
-a
-c
-​
-  
-b
-d
-​
- ]⊙[ 
-e
-g
-​
-  
-f
-h
-​
- ]=[ 
-ae
-cg
-​
-  
-bf
-dh
-​
- ]
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\odot
+\begin{bmatrix}
+e & f \\
+g & h
+\end{bmatrix}
+=
+\begin{bmatrix}
+ae & bf \\
+cg & dh
+\end{bmatrix}
+
 It's important not to confuse this with standard matrix multiplication.
 
 5. Multiplying a Matrix by Its Transpose
@@ -148,58 +129,38 @@ T
  A always has this property.
 
 Example:
+
 Using the matrix from the transpose example:
-$$ A = \begin{bmatrix} 1 & 2 \ 3 & 4 \ 5 & 6 \end{bmatrix} $$
+
+A = \begin{bmatrix}
+1 & 2 \\
+3 & 4 \\
+5 & 6
+\end{bmatrix}
+
 The product A 
 T
- A is:
+ A is:A^T A = \begin{bmatrix}
+ 1 & 3 & 5 \\
+ 2 & 4 & 6
+ \end{bmatrix}
+ \begin{bmatrix}
+ 1 & 2 \\
+ 3 & 4 \\
+ 5 & 6
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+ (1 \cdot 1 + 3 \cdot 3 + 5 \cdot 5) & (1 \cdot 2 + 3 \cdot 4 + 5 \cdot 6) \\
+ (2 \cdot 1 + 4 \cdot 3 + 6 \cdot 5) & (2 \cdot 2 + 4 \cdot 4 + 6 \cdot 6)
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
+ 35 & 44 \\
+ 44 & 56
+ \end{bmatrix}
 
-A 
-T
- A=[ 
-1
-2
-​
-  
-3
-4
-​
-  
-5
-6
-​
- ] 
-​
-  
-1
-3
-5
-​
-  
-2
-4
-6
-​
-  
-​
- =[ 
-(1⋅1+3⋅3+5⋅5)
-(2⋅1+4⋅3+6⋅5)
-​
-  
-(1⋅2+3⋅4+5⋅6)
-(2⋅2+4⋅4+6⋅6)
-​
- ]=[ 
-35
-44
-​
-  
-44
-56
-​
- ]
-Notice that the resulting matrix is symmetric (M 
+ Notice that the resulting matrix is symmetric (M 
 12
 ​
  =M 
